@@ -1,5 +1,6 @@
 package com.fahram.fundamentalaplikasiandroidsubmission1
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.fahram.fundamentalaplikasiandroidsubmission1.databinding.UserItemBinding
@@ -11,14 +12,19 @@ class UserAdapter(
     class ListUserVH(var binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListUserVH {
-        TODO("Not yet implemented")
+        val binding = UserItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ListUserVH(binding)
     }
 
     override fun onBindViewHolder(holder: ListUserVH, position: Int) {
-        TODO("Not yet implemented")
+        val (username, name, avatar) = listUsers[position]
+        holder.binding.ivAvatarItem.setImageResource(avatar)
+        holder.binding.tvUsernameItem.text = username
+        holder.binding.tvNameItem.text = name
+        holder.itemView.setOnClickListener {
+            onItemClick(listUsers[position])
+        }
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = listUsers.size
 }

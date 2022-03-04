@@ -1,6 +1,8 @@
 package com.fahram.fundamentalaplikasiandroidsubmission1
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fahram.fundamentalaplikasiandroidsubmission1.databinding.ActivityMainBinding
@@ -18,9 +20,16 @@ class MainActivity : AppCompatActivity() {
         list.addAll(listUsers)
         binding.rvUsers.layoutManager = LinearLayoutManager(this)
         val userAdapter = UserAdapter(list){
-
+            data -> showUserDetail(data)
         }
         binding.rvUsers.adapter = userAdapter
+    }
+
+    private fun showUserDetail(data: User) {
+        val intent = Intent(this@MainActivity, DetailUserActivity::class.java)
+        intent.putExtra(DetailUserActivity.EXTRA_USER, data)
+        Log.d(DetailUserActivity.EXTRA_USER,data.toString())
+        startActivity(intent)
     }
 
     private val listUsers: ArrayList<User>
@@ -30,10 +39,11 @@ class MainActivity : AppCompatActivity() {
         val name = resources.getStringArray(R.array.name)
         val avatar = resources.obtainTypedArray(R.array.avatar)
         val location = resources.getStringArray(R.array.location)
-        val repository = resources.getIntArray(R.array.repository)
+        val repository = resources.getStringArray(R.array.repository)
         val company = resources.getStringArray(R.array.company)
-        val followers = resources.getIntArray(R.array.followers)
-        val following = resources.getIntArray(R.array.following)
+        val followers = resources.getStringArray(R.array.followers)
+        val following = resources.getStringArray(R.array.following)
+        Log.d("Followers", followers.toString())
         for (i in name.indices){
             users.add(User(
                 username[i],

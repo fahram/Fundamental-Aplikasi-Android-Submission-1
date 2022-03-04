@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">GitHub User</string>
     <string name="placeholder">Some Text</string>
+    <string name="company">Company</string>
+    <string name="count">100</string>
 
     <string-array name="username">
         <item>JakeWharton</item>

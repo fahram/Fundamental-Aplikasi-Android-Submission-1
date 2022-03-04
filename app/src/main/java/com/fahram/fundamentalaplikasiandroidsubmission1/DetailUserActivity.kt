@@ -1,5 +1,7 @@
 package com.fahram.fundamentalaplikasiandroidsubmission1
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.fahram.fundamentalaplikasiandroidsubmission1.databinding.ActivityDetailUserBinding
@@ -24,5 +26,13 @@ class DetailUserActivity : AppCompatActivity() {
         binding.tvRepositoryDetail.text = user.repository
         binding.tvFollowerDetail.text = user.followers
         binding.tvFollowingDetail.text = user.following
+        binding.btnShare.setOnClickListener {
+            val share = Intent.createChooser(Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "https://github.com/${user.username}")
+                type = "text/plain"
+            }, null)
+            startActivity(share)
+        }
     }
 }
